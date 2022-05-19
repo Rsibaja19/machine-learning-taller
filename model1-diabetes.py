@@ -71,10 +71,10 @@ def sh_me(str_model, AUC, acc_validation, acc_test, y_test, y_pred):
 def panda_values(data):
     columns = ['Accuracy de Entrenamiento', 'Accuracy de Validación',
                'Accuracy de Test', 'Recall del Modelo', 'Precisión del Modelo',
-               'F1-Score del Modelo', 'Área bajo la Curva (AUC)']
+               'F1-Score del Modelo']
     data = np.transpose(data)
     tabla = pd.DataFrame(data=data, index=model_name, columns=columns)
-    return tabla.sort_values(by=['Área bajo la Curva (AUC)'], ascending=False)
+    return tabla.sort_values(by=['F1-Score del Modelo'], ascending=False)
 
 
 def view_matriz_confusion(matriz_confusion):
@@ -137,7 +137,7 @@ for i in range(len(model_name)):
     # matriz de confusion
     matriz_confu[i] = matriz_confusion
 
-tabla = panda_values([acc_va, acc_va, acc_te, recall, precision, f1, auc])
+tabla = panda_values([acc_va, acc_va, acc_te, recall, precision, f1])
 view_matriz_confusion(matriz_confu)
 show_roc_hot(matriz_confu)
 print(tabla)
